@@ -37,7 +37,21 @@ export const Home = () => {
 
   const DescName = () => {
     const sortedData = [...book].sort((a, b) => {
-      return a.title > b.title ? 1 : -1;
+      return a.title > b.title ? -1 : 1;
+    });
+    setBook(sortedData);
+  };
+
+  const SortByPrice = () => {
+    const sortedData = [...book].sort((a, b) => {
+      return a.price > b.price ? 1 : -1;
+    });
+    setBook(sortedData);
+  };
+
+  const DescPrice = () => {
+    const sortedData = [...book].sort((a, b) => {
+      return a.price > b.price ? -1 : 1;
     });
     setBook(sortedData);
   };
@@ -45,7 +59,12 @@ export const Home = () => {
   return (
     <div className="homeContainer">
       <h2 style={{ textAlign: "center" }}>Home</h2>
-      <SortAndFilterButtons handleSort={SortByName}  DescName={DescName}  />
+      <SortAndFilterButtons
+        handleSort={SortByName}
+        DescName={DescName}
+        SortByPrice={SortByPrice}
+        DescPrice={DescPrice}
+      />
 
       {/* <button
         onClick={() => {
