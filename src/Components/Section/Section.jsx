@@ -6,18 +6,21 @@ import { SortAndFilterButtons } from "../SortAndFilterButtons/SortAndFilterButto
 import styled from "styled-components";
 
 export const Section = () => {
-  const { a } = useParams();
+  const { section } = useParams();
+  console.log(section);
   const [book, setBook] = useState([]);
 
-  useEffect(() => {
-    getReq();
-  }, []);
-  const getReq = () => {
-    axios.get(`http://localhost:8080/books/section:${a}`).then(({ data }) => {
-      setBook(data);
-      console.log(data);
-    });
-  };
+  // useEffect(() => {
+  //   getReq();
+  // }, []);
+  // const getReq = () => {
+  //   axios
+  //     .get(`http://localhost:8080/books/section:${section}`)
+  //     .then(({ data }) => {
+  //       setBook(data);
+  //       console.log(data);
+  //     });
+  // };
 
   // you will receive section name from URL here.
   // Get books for only this section and show
@@ -29,11 +32,7 @@ export const Section = () => {
 
   return (
     <>
-      <h2 style={{ textAlign: "center" }}>
-        {
-          //   Show section name here
-        }
-      </h2>
+      <h2 style={{ textAlign: "center" }}>{<h1>{section}</h1>}</h2>
       <SortAndFilterButtons handleSort={"give sorting function to component"} />
 
       <Main className="sectionContainer">

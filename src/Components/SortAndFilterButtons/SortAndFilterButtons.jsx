@@ -1,4 +1,4 @@
-export const SortAndFilterButtons = ({ Sort }) => {
+export const SortAndFilterButtons = ({ handleSort, DescName }) => {
   return (
     <div className="sortButtons">
       {/*
@@ -17,10 +17,20 @@ export const SortAndFilterButtons = ({ Sort }) => {
           
         */}
 
-      <button className="sortByTitleAsc" onClick={() => {}}>
+      <button
+        className="sortByTitleAsc"
+        onClick={() => {
+          handleSort();
+        }}
+      >
         sortByTitleAsc
       </button>
-      <button className="sortByTitleDesc" onClick={() => {}}>
+      <button
+        className="sortByTitleDesc"
+        onClick={() => {
+          DescName();
+        }}
+      >
         sortByTitleDesc
       </button>
 

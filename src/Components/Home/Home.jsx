@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 
 export const Home = () => {
   const [book, setBook] = useState([]);
+
   useEffect(() => {
     getReq();
   }, []);
-
   const getReq = () => {
     axios.get("http://localhost:8080/books").then(({ data }) => {
       setBook(data);
@@ -22,24 +22,39 @@ export const Home = () => {
     /* Apply some responsive styling to children */
   `;
   const Sort = () => {
-    let da = book.sort((a, b) =>
+    let nData = book.sort((a, b) =>
       a.title > b.title ? 1 : b.title > a.title ? -1 : 0
     );
-    setBook(da);
+    setBook(book);
   };
-  
+
+  const SortByName = () => {
+    const sortedData = [...book].sort((a, b) => {
+      return a.title > b.title ? 1 : -1;
+    });
+    setBook(sortedData);
+  };
+
+  const DescName = () => {
+    const sortedData = [...book].sort((a, b) => {
+      return a.title > b.title ? 1 : -1;
+    });
+    setBook(sortedData);
+  };
+
   return (
     <div className="homeContainer">
       <h2 style={{ textAlign: "center" }}>Home</h2>
-      <SortAndFilterButtons handleSort={Sort} />
-      <button
+      <SortAndFilterButtons handleSort={SortByName}  DescName={DescName}  />
+
+      {/* <button
         onClick={() => {
-          Sort();
+          handleSort();
         }}
       >
-        {" "}
-        Wow
-      </button>
+        Sort Me
+      </button> */}
+
       <Main className="mainContainer">
         {/* 
             Iterate over books that you get from network
@@ -52,6 +67,7 @@ export const Home = () => {
         {book.map((ele) => {
           return (
             <BookCard
+              key={ele.id}
               id={ele.id}
               imageUrl={ele.imageUrl}
               title={ele.title}
@@ -59,7 +75,6 @@ export const Home = () => {
             />
           );
         })}
-        
       </Main>
     </div>
   );
