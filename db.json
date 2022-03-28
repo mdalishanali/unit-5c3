@@ -10,7 +10,7 @@
         { "ram": "The Most Antiquated Book Ever" }
       ],
       "author": "Book Author",
-      "price": 125,
+      "price": 9999,
       "section": "history",
       "isbnNumber": 1234567
     },
@@ -24,7 +24,7 @@
         { "ram": "The Most Antiquated Book Ever" }
       ],
       "author": "Book Author",
-      "price": 125,
+      "price": -99999,
       "section": "history",
       "isbnNumber": 1234567
     },
@@ -39,7 +39,7 @@
       ],
       "author": "Book Author",
       "price": 125,
-      "section": "history",
+      "section": "mythology",
       "isbnNumber": 1234567
     },
     {
@@ -53,8 +53,8 @@
       ],
       "author": "Book Author",
       "price": 125,
-      "section": "Technology",
-      "isbnNumber": 1234567
+      "section": "technology",
+      "isbnNumber": 1
     },
     {
       "id": 4,

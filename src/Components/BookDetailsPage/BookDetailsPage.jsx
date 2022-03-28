@@ -4,15 +4,15 @@ import { useParams } from "react-router-dom";
 
 export const BookDetailsPage = () => {
   const [data, setData] = useState([]);
-  // Get book details based on ID whenever user lands on the page
-  // ID will come from route
-  const { id } = useParams();
+
+  const { ID } = useParams();
 
   useEffect(() => {
     getReq();
   }, []);
+
   const getReq = () => {
-    axios.get(`http://localhost:8080/books/${id}`).then(({ data }) => {
+    axios.get(`http://localhost:8080/books/${ID}`).then(({ data }) => {
       setData(data);
       console.log(data);
     });
@@ -29,11 +29,7 @@ export const BookDetailsPage = () => {
         <div className="section">{data.section}</div>
         <div className="isbnNumber">{data.isbnNumber}</div>
         <ul className="reviews">
-          {/* Reviews will be an array, iterate over them and create a new <li> for every review */}
-
-          {/* {data.reviews.map((ele) => {
-            return <li>{ele}</li>;
-          })} */}
+          <li></li>
         </ul>
       </div>
     </>

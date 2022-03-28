@@ -10,43 +10,75 @@ export const Section = () => {
   console.log(section);
   const [book, setBook] = useState([]);
 
-  // useEffect(() => {
-  //   getReq();
-  // }, []);
-  // const getReq = () => {
-  //   axios
-  //     .get(`http://localhost:8080/books/section:${section}`)
-  //     .then(({ data }) => {
-  //       setBook(data);
-  //       console.log(data);
-  //     });
-  // };
+  useEffect(() => {
+    getReq();
+  }, []);
+  const getReq = () => {
+    axios.get(`http://localhost:8080/books`).then(({ data }) => {
+      setBook(data);
+      console.log(data);
+    });
+  };
 
-  // you will receive section name from URL here.
-  // Get books for only this section and show
-  //   Everything else is same as Home page
+
 
   const Main = styled.div`
     /* Same as Homepage */
   `;
+  const SortByName = (e) => {
+    if (e.target.innerText === "sortByTitleAsc") {
+      const sortedData = [...book].sort((a, b) => {
+        return a.title > b.title ? 1 : -1;
+      });
+      setBook(sortedData);
+    }
+  };
+
+  const DescName = () => {
+    const sortedData = [...book].sort((a, b) => {
+      return a.title > b.title ? -1 : 1;
+    });
+    setBook(sortedData);
+  };
+
+  const SortByPrice = () => {
+    const sortedData = [...book].sort((a, b) => {
+      return a.price > b.price ? 1 : -1;
+    });
+    setBook(sortedData);
+  };
+
+  const DescPrice = () => {
+    const sortedData = [...book].sort((a, b) => {
+      return a.price > b.price ? -1 : 1;
+    });
+
+    setBook(sortedData);
+  };
 
   return (
     <>
       <h2 style={{ textAlign: "center" }}>{<h1>{section}</h1>}</h2>
-      <SortAndFilterButtons handleSort={"give sorting function to component"} />
+      <SortAndFilterButtons
+        handleSort={SortByName}
+        DescName={DescName}
+        SortByPrice={SortByPrice}
+        DescPrice={DescPrice}
+      />
 
       <Main className="sectionContainer">
-        {book.map((ele) => {
-          return (
-            <BookCard
-              id={ele.id}
-              imageUrl={ele.imageUrl}
-              title={ele.title}
-              price={ele.price}
-            />
-          );
-        })}
-        {/* SHow same BookCard component here, just like homepage but with books only belong to this Section */}
+        {book
+          .filter((ele) => ele.section.includes(section))
+          .map((ele) => {
+            return (
+              <BookCard
+                id={ele.id}
+                imageUrl={ele.imageUrl}
+                title={ele.title}
+                price={ele.price}
+              />
+            );
+          })}
       </Main>
     </>
   );

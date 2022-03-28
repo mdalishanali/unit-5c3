@@ -10,29 +10,28 @@ export const Home = () => {
   useEffect(() => {
     getReq();
   }, []);
+
   const getReq = () => {
     axios.get("http://localhost:8080/books").then(({ data }) => {
       setBook(data);
     });
   };
-  // get all books when user lands on the page
-  // populate them as mentioned below
 
   const Main = styled.div`
-    /* Apply some responsive styling to children */
+    width: "100%";
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20%;
+    width: 30%;
   `;
-  const Sort = () => {
-    let nData = book.sort((a, b) =>
-      a.title > b.title ? 1 : b.title > a.title ? -1 : 0
-    );
-    setBook(book);
-  };
 
-  const SortByName = () => {
-    const sortedData = [...book].sort((a, b) => {
-      return a.title > b.title ? 1 : -1;
-    });
-    setBook(sortedData);
+  const SortByName = (e) => {
+    if (e.target.innerText === "sortByTitleAsc") {
+      const sortedData = [...book].sort((a, b) => {
+        return a.title > b.title ? 1 : -1;
+      });
+      setBook(sortedData);
+    }
   };
 
   const DescName = () => {
@@ -53,6 +52,7 @@ export const Home = () => {
     const sortedData = [...book].sort((a, b) => {
       return a.price > b.price ? -1 : 1;
     });
+
     setBook(sortedData);
   };
 
@@ -66,23 +66,8 @@ export const Home = () => {
         DescPrice={DescPrice}
       />
 
-      {/* <button
-        onClick={() => {
-          handleSort();
-        }}
-      >
-        Sort Me
-      </button> */}
 
       <Main className="mainContainer">
-        {/* 
-            Iterate over books that you get from network
-            populate a <BookCard /> component
-            pass down books id, imageUrl, title, price and anything else that you want to 
-            show in books Card.
-        */}
-        {console.log(book)}
-
         {book.map((ele) => {
           return (
             <BookCard
